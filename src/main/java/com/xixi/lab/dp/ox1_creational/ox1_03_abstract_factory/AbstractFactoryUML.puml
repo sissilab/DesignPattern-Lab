@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package Product <<Rectangle>> {
+    interface IProduct {
+        + void desc()
+    }
+
+    abstract AbstractPhone implements IProduct {
+        + {abstract} void desc()
+    }
+    abstract AbstractLaptop implements IProduct {
+        + {abstract} void desc()
+    }
+    abstract AbstractEarphone implements IProduct {
+        + {abstract} void desc()
+    }
+
+    package Huawei <<Rectangle>> {
+        class HuaweiPhone extends AbstractPhone {
+            + void desc()
+        }
+        class HuaweiLaptop extends AbstractLaptop {
+            + void desc()
+        }
+        class HuaweiEarphone extends AbstractEarphone {
+            + void desc()
+        }
+    }
+
+    package Apple <<Rectangle>> {
+        class ApplePhone extends AbstractPhone {
+            + void desc()
+        }
+        class AppleLaptop extends AbstractLaptop {
+            + void desc()
+        }
+        class AppleEarphone extends AbstractEarphone {
+            + void desc()
+        }
+    }
+}
+
+package Factory <<Rectangle>> {
+    interface IFactory {
+        + IProduct makePhone()
+        + IProduct makeLaptop()
+        + IProduct makeEarphone()
+    }
+    class HuaweiFactory implements IFactory {
+        + IProduct makePhone()
+        + IProduct makeLaptop()
+        + IProduct makeEarphone()
+    }
+    class AppleFactory implements IFactory {
+        + IProduct makePhone()
+        + IProduct makeLaptop()
+        + IProduct makeEarphone()
+    }
+}
+
+class AbstractFactoryMain {
+}
+
+HuaweiFactory ..> Huawei : create
+AppleFactory ..> Apple : create
+AbstractFactoryMain ..> Factory : use
+@enduml

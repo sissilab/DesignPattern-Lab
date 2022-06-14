@@ -4,8 +4,8 @@
 
 **1. 创建型模式 (Creational Pattern)：**
 - [1.1.单例模式](docs/ox1_creational/ox1_01_Singleton_Pattern.md)
-- 1.2.工厂方法模式
-- 1.3.抽象工厂模式
+- [1.2.工厂方法模式](docs/ox1_creational/ox1_02_Factory_Method_Pattern.md)
+- [1.3.抽象工厂模式](docs/ox1_creational/ox1_03_Abstract_Factory_Pattern.md)
 - 1.4.建造者模式
 - 1.5.原型模式
 
