@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package Product <<Rectangle>> {
+    interface IProduct {
+        + void desc()
+    }
+    class Phone implements IProduct {
+        + void desc()
+    }
+    class Laptop implements IProduct {
+        + void desc()
+    }
+    class Earphone implements IProduct {
+        + void desc()
+    }
+}
+
+class SimpleFactory {
+    + enum PRODUCT_TYPE
+    + {static} IProduct createProduct(PRODUCT_TYPE productType)
+}
+
+class SimpleFactoryMain {
+}
+
+SimpleFactory ..> Product : create by PRODUCT_TYPE
+SimpleFactoryMain ..> SimpleFactory : use
+
+@enduml

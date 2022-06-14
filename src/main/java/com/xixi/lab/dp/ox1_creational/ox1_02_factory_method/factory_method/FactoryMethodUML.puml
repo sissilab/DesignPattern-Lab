@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package Product <<Rectangle>> {
+    interface IProduct {
+        + void desc()
+    }
+    class Phone implements IProduct {
+        + void desc()
+    }
+    class Laptop implements IProduct {
+        + void desc()
+    }
+    class Earphone implements IProduct {
+        + void desc()
+    }
+}
+
+package Factory <<Rectangle>> {
+    interface IFactory {
+        + IProduct createProduct()
+    }
+    class PhoneFactory implements IFactory {
+        + IProduct createProduct()
+    }
+    class LaptopFactory implements IFactory {
+        + IProduct createProduct()
+    }
+    class EarphoneFactory implements IFactory {
+        + IProduct createProduct()
+    }
+}
+
+class FactoryMethodMain {
+}
+
+PhoneFactory ..> Phone : create
+LaptopFactory ..> Laptop : create
+EarphoneFactory ..> Earphone : create
+
+FactoryMethodMain ..> Factory : use
+
+@enduml
