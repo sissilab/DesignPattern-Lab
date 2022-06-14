@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class TransformerFactory {
+    + {static} TransformerFactory newInstance()
+    + {abstract} Transformer newTransformer(Source source)
+    + {abstract} Transformer newTransformer()
+    + {abstract} Templates newTemplates(Source source)
+}
+
+abstract class SAXTransformerFactory extends TransformerFactory {
+}
+
+class TransformerFactoryImpl extends SAXTransformerFactory {
+    + Transformer newTransformer(Source source)
+    + Transformer newTransformer()
+    + Templates newTemplates(Source source)
+}
+
+class SmartTransformerFactoryImpl extends SAXTransformerFactory {
+    + Transformer newTransformer(Source source)
+    + Transformer newTransformer()
+    + Templates newTemplates(Source source)
+}
+
+@enduml

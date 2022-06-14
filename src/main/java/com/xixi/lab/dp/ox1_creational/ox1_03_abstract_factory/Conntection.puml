@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface java.sql.Connection {
+    + {abstract} Statement createStatement()
+    + {abstract} PreparedStatement prepareStatement(String sql)
+    + {abstract} CallableStatement prepareCall(String sql)
+}
+
+interface com.mysql.cj.jdbc.JdbcConnection extends java.sql.Connection {
+}
+
+class com.mysql.cj.jdbc.ConnectionImpl implements com.mysql.cj.jdbc.JdbcConnection {
+    + Statement createStatement()
+    + PreparedStatement prepareStatement(String sql)
+    + CallableStatement prepareCall(String sql)
+}
+
+class com.alibaba.druid.pool.DruidPooledConnection implements java.sql.Connection {
+    + Statement createStatement()
+    + PreparedStatement prepareStatement(String sql)
+    + CallableStatement prepareCall(String sql)
+}
+
+class org.apache.commons.dbcp2.DelegatingConnection implements java.sql.Connection {
+    + Statement createStatement()
+    + PreparedStatement prepareStatement(String sql)
+    + CallableStatement prepareCall(String sql)
+}
+
+@enduml

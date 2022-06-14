@@ -304,7 +304,13 @@ I am Huawei earphone.
 
 # 3. 在源码中的应用
 
-// todo
+## 3.1. JDK源码-javax.xml.transform.TransformerFactory
+
+`TransformerFactory` 作为抽象工厂，定义了两个创建不同对象的抽象方法 `Transformer newTransformer()` 和 `Templates newTemplates()`，其具体实现类有 `TransformerFactoryImpl` 和 `SmartTransformerFactoryImpl` 分别覆盖实现了这些方法，用于创建相应的对象。
+
+![TransformerFactory_class_diagram.png](../assets/abstract-factory/TransformerFactory_class_diagram.png)
+
+## 3.2. JDK源码-java.sql.Connection
 
 `java.sql.Connection` 接口相当于抽象工厂接口，可提供（生产）不同产品等级的 Statement、PreparedStatement 和 CallableStatement，提供出来的产品都属于 `java.sql.Statement` 接口下的具体产品。
 
@@ -325,7 +331,9 @@ public interface Connection extends Wrapper, AutoCloseable {
 }
 ```
 
+抽象工厂、及其实现的具体工厂的类图：
 
+![Connection_class_diagram.png](../assets/abstract-factory/Connection_class_diagram.png)
 
 # 4. 总结
 
@@ -350,3 +358,4 @@ public interface Connection extends Wrapper, AutoCloseable {
 - [抽象工厂模式（详解版） (biancheng.net)](http://c.biancheng.net/view/1351.html)
 - [抽象工厂模式](https://refactoringguru.cn/design-patterns/abstract-factory)
 - [抽象工厂在Java源码中的应用](http://c.biancheng.net/view/8392.html)
+- [Abstract Factory in java-design-patterns](https://java-design-patterns.com/patterns/abstract-factory/)
