@@ -20,7 +20,7 @@
 
 - **缺点**：
     1. 客户使用端必须理解所有策略算法的区别，以便决定使用何种策略算法
-    2. 一定程度上产生了很多的具体策略类，造成策略类膨胀，可考虑函数式接口实现，直接用 lambda 表达式来实现具体策略，可参考 [Arrays.sort() 的 Comparator](#33-jdk-javautilcomparator)
+    2. 一定程度上产生了很多的具体策略类，造成策略类膨胀，可考虑函数式接口实现，直接用 lambda 表达式来实现具体策略，可参考 [Arrays.sort() 的 Comparator](#33-jdk源码-javautilcomparator)
     
 # 1. 结构与实现
 
@@ -324,38 +324,38 @@ public class DefaultResourceLoader implements ResourceLoader {
     // ...
 
     @Override
-	public Resource getResource(String location) {
+    public Resource getResource(String location) {
 		Assert.notNull(location, "Location must not be null");
 
-		for (ProtocolResolver protocolResolver : this.protocolResolvers) {
-			Resource resource = protocolResolver.resolve(location, this);
-			if (resource != null) {
-				return resource;
-			}
-		}
+        for (ProtocolResolver protocolResolver : this.protocolResolvers) {
+            Resource resource = protocolResolver.resolve(location, this);
+            if (resource != null) {
+                return resource;        
+            }
+        }
 
-		if (location.startsWith("/")) {
+        if (location.startsWith("/")) {
             // 若 location 以“/”开头，则先截取其后的路径，然后采用 ClassPathContextResource
-			return getResourceByPath(location);
-		}
-		else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
+        	return getResourceByPath(location);
+        }
+        else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
             // 若包含“classpath:”前缀，则采用 ClassPathContextResource
-			return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
-		}
-		else {
-			try {
-				// Try to parse the location as a URL...
-				URL url = new URL(location);
-				// 否则，采用 UrlResource
-				return new UrlResource(url);
-			}
-			catch (MalformedURLException ex) {
-				// No URL -> resolve as resource path.
-				// 若非URL，还是采用 ClassPathContextResource
-				return getResourceByPath(location);
-			}
-		}
-	}
+        	return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
+        }
+        else {
+        	try {
+        		// Try to parse the location as a URL...
+        		URL url = new URL(location);
+        		// 否则，采用 UrlResource
+        		return new UrlResource(url);
+        	}
+        	catch (MalformedURLException ex) {
+        		// No URL -> resolve as resource path.
+        		// 若非URL，还是采用 ClassPathContextResource
+        		return getResourceByPath(location);
+        	}
+        }
+    }
 
     // ...
 }
@@ -392,48 +392,48 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
 
     // 基于默认无参构造函数创建bean实例
     @Override
-	public Object instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner) {
-		// Don't override the class with CGLIB if no overrides.
-		if (bd.getMethodOverrides().isEmpty()) {
-    		// 若无 MethodOverride 情况：
-			Constructor<?> constructorToUse;
-			synchronized (bd.constructorArgumentLock) {
-    			// 获取构造函数
-				constructorToUse = (Constructor<?>) bd.resolvedConstructorOrFactoryMethod;
-				if (constructorToUse == null) {
-					final Class<?> clazz = bd.getBeanClass();
-					if (clazz.isInterface()) {
-						throw new BeanInstantiationException(clazz, "Specified class is an interface");
-					}
-					try {
-						if (System.getSecurityManager() != null) {
-							constructorToUse = AccessController.doPrivileged(new PrivilegedExceptionAction<Constructor<?>>() {
-								@Override
-								public Constructor<?> run() throws Exception {
-									return clazz.getDeclaredConstructor((Class[]) null);
-								}
-							});
-						}
-						else {
-    						// 获取无参构造函数
-							constructorToUse =	clazz.getDeclaredConstructor((Class[]) null);
-						}
-						bd.resolvedConstructorOrFactoryMethod = constructorToUse;
-					}
-					catch (Throwable ex) {
-						throw new BeanInstantiationException(clazz, "No default constructor found", ex);
-					}
-				}
-			}
-			// 反射创建bean实例
-			return BeanUtils.instantiateClass(constructorToUse);
-		}
-		else {
-    		// 若有 MethodOverride（lookup-method、replaced-method） 情况：使用CGLIB来生成子类
-			// Must generate CGLIB subclass.
-			return instantiateWithMethodInjection(bd, beanName, owner);
-		}
-	}
+    public Object instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner) {
+    	// Don't override the class with CGLIB if no overrides.
+    	if (bd.getMethodOverrides().isEmpty()) {
+            // 若无 MethodOverride 情况：
+            Constructor<?> constructorToUse;
+            synchronized (bd.constructorArgumentLock) {
+                // 获取构造函数
+                constructorToUse = (Constructor<?>) bd.resolvedConstructorOrFactoryMethod;
+                if (constructorToUse == null) {
+                    final Class<?> clazz = bd.getBeanClass();
+                    if (clazz.isInterface()) {
+                    	throw new BeanInstantiationException(clazz, "Specified class is an interface");
+                    }
+                    try {
+                        if (System.getSecurityManager() != null) {
+                            constructorToUse = AccessController.doPrivileged(new PrivilegedExceptionAction<Constructor<?>>() {
+                                  @Override
+                                  public Constructor<?> run() throws Exception {
+                                      return clazz.getDeclaredConstructor((Class[]) null);
+                                  }
+                            });
+                        }
+                        else {
+                            // 获取无参构造函数
+                            constructorToUse = clazz.getDeclaredConstructor((Class[]) null);
+                        }
+                        bd.resolvedConstructorOrFactoryMethod = constructorToUse;
+                    }
+                    catch (Throwable ex) {
+                    	throw new BeanInstantiationException(clazz, "No default constructor found", ex);
+                    }
+                }
+            }
+            // 反射创建bean实例
+            return BeanUtils.instantiateClass(constructorToUse);
+    	}
+    	else {
+            // 若有 MethodOverride（lookup-method、replaced-method） 情况：使用CGLIB来生成子类
+            // Must generate CGLIB subclass.
+            return instantiateWithMethodInjection(bd, beanName, owner);
+    	}
+    }
 }
 ```
 
@@ -446,16 +446,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     private InstantiationStrategy instantiationStrategy = new CglibSubclassingInstantiationStrategy();
 
     protected InstantiationStrategy getInstantiationStrategy() {
-		return this.instantiationStrategy;
-	}
+        return this.instantiationStrategy;
+    }
 
     // ...
 }
 ```
 
 ## 3.3. JDK源码-java.util.Comparator
-
-^fe565b
 
 `Comparator` 接口有一个 `int compare(T o1, T o2)` 方法，用以实现自定义比较策略，其方法返回值为 `int`，有3种情况：
 - o1大于o2，返回正整数

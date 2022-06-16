@@ -19,7 +19,7 @@
 - 2.7.享元模式
 
 **3. 行为型模式 (Behavioral Pattern)：**
-- 3.1.策略模式
+- [3.1.策略模式](docs/ox3_behavioral/ox3_01_Strategy_Pattern.md)
 - 3.2.模板方法模式
 - 3.3.观察者模式
 - 3.4.迭代子模式
