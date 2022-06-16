@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package Strategy <<Rectangle>> {
+    interface Strategy {
+        + {abstract} algorithm()
+    }
+
+    class ConcreteStrategyA implements Strategy {
+        + algorithm()
+    }
+
+    class ConcreteStrategyB implements Strategy {
+        + algorithm()
+    }
+}
+
+class Context {
+    - strategy: Strategy
+    + Context(Strategy strategy)
+    + changStrategy(Strategy strategy): void
+    + runStrategy(): void
+}
+
+Context o-- Strategy
+
+note left of Context
+    public void runStrategy() {
+        strategy.algorithm();
+    }
+end note
+
+@enduml

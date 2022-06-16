@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package Strategy <<Rectangle>> {
+    interface InstantiationStrategy {
+        + {abstract} instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner): Object
+        + {abstract} instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner, Constructor<?> ctor, Object... args): Object
+        + {abstract} instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner, Object factoryBean, Method factoryMethod, Object... args): Object
+    }
+
+    class SimpleInstantiationStrategy implements InstantiationStrategy {
+        + instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner): Object
+        + instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner, Constructor<?> ctor, Object... args): Object
+        + instantiate(RootBeanDefinition bd, String beanName, BeanFactory owner, Object factoryBean, Method factoryMethod, Object... args): Object
+        # instantiateWithMethodInjection(RootBeanDefinition bd, String beanName, BeanFactory owner): Object
+        # instantiateWithMethodInjection(RootBeanDefinition bd, String beanName, BeanFactory owner, Constructor<?> ctor, Object... args): Object
+    }
+
+    class CglibSubclassingInstantiationStrategy extends SimpleInstantiationStrategy {
+        # instantiateWithMethodInjection(RootBeanDefinition bd, String beanName, BeanFactory owner): Object
+        # instantiateWithMethodInjection(RootBeanDefinition bd, String beanName, BeanFactory owner, Constructor<?> ctor, Object... args): Object
+    }
+}
+
+abstract class AbstractAutowireCapableBeanFactory {
+    - instantiationStrategy: InstantiationStrategy
+    + setInstantiationStrategy(InstantiationStrategy instantiationStrategy): void
+    # getInstantiationStrategy(): InstantiationStrategy
+}
+
+AbstractAutowireCapableBeanFactory o-- InstantiationStrategy
+AbstractAutowireCapableBeanFactory ..> CglibSubclassingInstantiationStrategy
+
+@enduml

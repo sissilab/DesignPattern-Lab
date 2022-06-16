@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package Strategy <<Rectangle>> {
+    interface IHandleStrategy {
+        + {abstract} handle(): void
+    }
+
+    class ImageHandleStrategy implements IHandleStrategy {
+        + handle(): void
+    }
+
+    class VideoHandleStrategy implements IHandleStrategy {
+        + handle(): void
+    }
+
+    class AudioHandleStrategy implements IHandleStrategy {
+        + handle(): void
+    }
+}
+
+class HandleContext {
+    - handleStrategy: IHandleStrategy
+    + HandleContext(IHandleStrategy handleStrategy)
+    + changeHandleStrategy(IHandleStrategy handleStrategy): void
+    + handle(): void
+}
+
+HandleContext o-- IHandleStrategy
+
+note left of HandleContext
+    public void handle() {
+        handleStrategy.handle();
+    }
+end note
+
+@enduml
