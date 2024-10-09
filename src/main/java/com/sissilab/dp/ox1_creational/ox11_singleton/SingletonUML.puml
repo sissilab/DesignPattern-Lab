@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Singleton {
+- {static} instance: Singleton
+- Singleton()
++ {static} getInstance(): Singleton
+}
+
+class SingletonMain {
+}
+
+SingletonMain ..> Singleton : use
+
+@enduml
