@@ -7,9 +7,6 @@ import com.sissilab.dp.ox1_creational.ox12_factory_method.simple_factory.product
 
 public class SimpleFactory {
 
-    /**
-     * 产品类型
-     */
     public enum PRODUCT_TYPE {
         PHONE,
         LAPTOP,
@@ -17,7 +14,7 @@ public class SimpleFactory {
     }
 
     /**
-     * 根据类型，创建不同的产品
+     * Create a new product object according to the product type
      *
      * @param productType
      * @return
