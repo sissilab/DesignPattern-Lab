@@ -7,7 +7,7 @@ import com.sissilab.dp.ox1_creational.ox13_abstract_factory.product.IProduct;
 import com.sissilab.dp.ox1_creational.ox13_abstract_factory.product.AppleEarphone;
 
 /**
- * 苹果工厂
+ * Apple Concrete Factory
  */
 public class AppleFactory implements IFactory {
 
@@ -16,7 +16,7 @@ public class AppleFactory implements IFactory {
     }
 
     /**
-     * 生产苹果手机
+     * produce Apple phones
      */
     @Override
     public IProduct makePhone() {
@@ -25,7 +25,7 @@ public class AppleFactory implements IFactory {
     }
 
     /**
-     * 生产苹果笔记本
+     * produce Apple laptops
      */
     @Override
     public IProduct makeLaptop() {
@@ -34,7 +34,7 @@ public class AppleFactory implements IFactory {
     }
 
     /**
-     * 生产苹果耳机
+     * produce Apple earphones
      */
     @Override
     public IProduct makeEarphone() {

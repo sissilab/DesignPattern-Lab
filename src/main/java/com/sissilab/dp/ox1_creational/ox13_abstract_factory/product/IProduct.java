@@ -1,9 +1,9 @@
 package com.sissilab.dp.ox1_creational.ox13_abstract_factory.product;
 
-// 抽象产品
+// Abstract Product
 public interface IProduct {
     /**
-     * 产品描述
+     * Product description
      */
     void desc();
 }

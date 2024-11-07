@@ -7,7 +7,7 @@ import com.sissilab.dp.ox1_creational.ox13_abstract_factory.product.IProduct;
 import com.sissilab.dp.ox1_creational.ox13_abstract_factory.product.HuaweiPhone;
 
 /**
- * 华为工厂
+ * Huawei Concrete Factory
  */
 public class HuaweiFactory implements IFactory {
 
@@ -16,7 +16,7 @@ public class HuaweiFactory implements IFactory {
     }
 
     /**
-     * 生产华为手机
+     * produce Huawei phones
      */
     @Override
     public IProduct makePhone() {
@@ -25,7 +25,7 @@ public class HuaweiFactory implements IFactory {
     }
 
     /**
-     * 生产华为笔记本
+     * produce Huawei laptops
      */
     @Override
     public IProduct makeLaptop() {
@@ -34,7 +34,7 @@ public class HuaweiFactory implements IFactory {
     }
 
     /**
-     * 生产华为耳机
+     * produce Huawei earphones
      */
     @Override
     public IProduct makeEarphone() {

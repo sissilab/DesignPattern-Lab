@@ -1,10 +1,8 @@
 package com.sissilab.dp.ox1_creational.ox13_abstract_factory.product;
 
-// 华为族具体产品：华为手机
+// Huawei Concrete Earphone Product
 public class HuaweiPhone extends AbstractPhone {
-    /**
-     * 华为手机产品描述
-     */
+
     @Override
     public void desc() {
         System.out.println("I am Huawei phone.");

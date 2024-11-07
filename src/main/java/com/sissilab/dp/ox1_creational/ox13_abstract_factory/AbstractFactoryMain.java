@@ -8,29 +8,29 @@ import com.sissilab.dp.ox1_creational.ox13_abstract_factory.product.IProduct;
 
 public class AbstractFactoryMain {
     public static void main(String[] args) {
-        // 创建华为工厂来生产具体产品
+        // Create a Huawei factory to produce concrete products.
         IFactory huaweiFactory = new HuaweiFactory();
-        // 通过华为工厂来制作手机
+        // Create a phone through the Huawei factory.
         IProduct huaweiPhone = huaweiFactory.makePhone();
         huaweiPhone.desc();
-        // 通过华为工厂来制作笔记本
+        // Create a laptop through the Huawei factory.
         IProduct huaweiLaptop = huaweiFactory.makeLaptop();
         huaweiLaptop.desc();
-        // 通过华为工厂来制作耳机
+        // Create an earphone through the Huawei factory.
         IProduct huaweiEarphone = huaweiFactory.makeEarphone();
         huaweiEarphone.desc();
 
         System.out.println("-----------------");
 
-        // 创建苹果工厂来生产具体产品
+        // Create a Apple factory to produce concrete products.
         IFactory appleFactory = new AppleFactory();
-        // 通过苹果工厂来制作手机
+        // Create a phone through the Apple factory.
         IProduct applePhone = appleFactory.makePhone();
         applePhone.desc();
-        // 通过苹果工厂来制作笔记本
+        // Create a laptop through the Apple factory.
         IProduct appleLaptop = appleFactory.makeLaptop();
         appleLaptop.desc();
-        // 通过苹果工厂来制作耳机
+        // Create an earphone through the Apple factory.
         IProduct appleEarphone = appleFactory.makeEarphone();
         appleEarphone.desc();
     }
